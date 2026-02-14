@@ -1,13 +1,14 @@
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>巴卡云GOTO节点 · 自适应域名</title>
+    <title>巴卡云GOTO节点</title>
     <link rel="icon" href="https://raw.githubusercontent.com/haolinawa/556354.xyz/refs/heads/main/bakayun-xyz.png">
     <!-- 引入Iconify图标库 -->
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <!-- 自定义字体 & 自适应域名脚本 -->
+    <!-- 自定义字体 -->
     <style>
         @font-face {
             font-family: 'CrookedBlackFun';
@@ -16,7 +17,6 @@
             font-style: normal;
             font-display: swap;
         }
-
         /* 全局样式重置 + 基础设置 */
         * {
             margin: 0;
@@ -24,7 +24,6 @@
             box-sizing: border-box;
             font-family: 'CrookedBlackFun', sans-serif;
         }
-
         body {
             background-color: #2d2d2d; /* 深灰色背景 */
             color: #f5f5f5;
@@ -35,7 +34,6 @@
             display: flex;
             flex-direction: column;
         }
-
         /* 核心容器（不对称布局） */
         .goto-container {
             flex: 1;
@@ -46,21 +44,17 @@
             grid-template-columns: 1fr;
             gap: 40px;
         }
-
         /* 标题区（不对称视觉） */
         .goto-title {
             padding-left: 20px;
             margin-bottom: 20px;
         }
-
-        /* 注意修复选择器中的全角句号，改为正常点 */
         .goto-title h1 {
             font-size: 64px;
             color: #c2e9fb;
             position: relative;
             line-height: 1.2;
         }
-
         .goto-title h1::after {
             content: '';
             position: absolute;
@@ -70,14 +64,12 @@
             height: 5px;
             background: linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%);
         }
-
         .goto-title p {
             font-size: 22px;
             color: #e0e0e0;
             margin-top: 25px;
             max-width: 600px;
         }
-
         /* 按钮区域（不对称布局：按钮宽度/间距差异化） */
         .goto-buttons {
             display: flex;
@@ -86,7 +78,6 @@
             align-items: flex-start; /* 避开完美居中 */
             padding-left: 20px;
         }
-
         /* 节点按钮样式（深度定制+非线性动画） */
         .node-btn {
             background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
@@ -102,31 +93,24 @@
             display: inline-block;
             /* 不对称宽度 */
         }
-
         .node-btn:nth-child(1) {
             width: 85%;
         }
-
         .node-btn:nth-child(2) {
             width: 75%;
         }
-
         .node-btn:nth-child(3) {
             width: 90%;
         }
-
         .node-btn:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 10px 20px rgba(161, 196, 253, 0.3);
         }
-
         /* 按钮图标装饰 */
         .node-btn iconify-icon {
             margin-right: 15px;
             font-size: 32px;
-            vertical-align: middle;
         }
-
         /* 页脚 */
         footer {
             padding: 40px 20px;
@@ -134,34 +118,28 @@
             text-align: right; /* 不对称视觉 */
             margin-top: auto;
         }
-
         .copyright {
             font-size: 18px;
             color: #a1c4fd;
         }
-
         /* 响应式适配 */
         @media (max-width: 768px) {
             .goto-title h1 {
                 font-size: 48px;
             }
-
             .node-btn {
                 width: 100% !important;
                 font-size: 24px;
                 padding: 18px 30px;
             }
-
             .goto-title, .goto-buttons {
                 padding-left: 0;
                 text-align: center;
             }
-
             .goto-title h1::after {
                 left: 50%;
                 transform: translateX(-50%);
             }
-
             footer {
                 text-align: center;
             }
@@ -174,83 +152,44 @@
         <div class="goto-title">
             <h1>巴卡云分流节点</h1>
             <p>请关闭VPN后续访问</p>
-            <p>全国CDN分流 · 自适应域名</p>
+            <p>全国CDN分流</p>
         </div>
-        <div class="goto-buttons" id="dynamic-buttons">
-            <!-- 按钮会由js动态生成，保留原始占位以确保样式类存在，但为了完全动态，我们直接用js填充 -->
+        <div class="goto-buttons">
+            <!-- CF节点按钮 -->
+            <a href="#" id="cf-btn" target="_blank" class="node-btn">
+                <iconify-icon icon="ph:cloud-light"></iconify-icon>CF节点
+            </a>
+            <!-- NL节点按钮 -->
+            <a href="#" id="nl-btn" target="_blank" class="node-btn">
+                <iconify-icon icon="ph:map-pin-light"></iconify-icon>NL节点
+            </a>
+            <!-- VC节点按钮 -->
+            <a href="#" id="vc-btn" target="_blank" class="node-btn">
+                <iconify-icon icon="ph:globe-light"></iconify-icon>VC节点
+            </a>
         </div>
     </div>
-
     <!-- 页脚 -->
     <footer>
         <div class="copyright">© 2026 巴卡云 All Copyright</div>
     </footer>
 
     <script>
-        (function() {
-            // 获取当前页面的主机名 (例如: bakayun.cv 或 1232456.xyz 或 localhost:3000)
-            let currentHost = window.location.hostname;
-            // 如果主机是 "localhost" 或者 IP 形式，我们保留原样；也可以设置一个默认演示域名
-            // 但是根据需求: 主域名是 bakayun.cv 时子域名为 baka1.bakayun.cv；如果主域名是 1232456.xyz 子域名即 baka1.1232456.xyz
-            // 注意: 如果主机包含端口号如 localhost:8080，hostname 是不带端口的，正确。
+        // 动态生成节点链接基于当前主域名
+        document.addEventListener('DOMContentLoaded', function() {
+            const hostname = window.location.hostname; // 获取当前主域名，例如 '556354.xyz' 或 'bakayun.cv'
             
-            // 定义三个子域前缀
-            const subPrefixes = ['baka1', 'baka2', 'baka3'];
-            // 协议对应 (CF节点用http, 其他用https, 也可保持原来的风格)
-            const protocols = ['http://', 'https://', 'https://']; 
-            // 节点显示名称与图标 (保持不变)
-            const labels = ['CF节点', 'NL节点', 'VC节点'];
-            const icons = ['ph:cloud-light', 'ph:map-pin-light', 'ph:globe-light'];
-
-            // 构造完整的链接
-            // 如果当前主机是纯域名(如 bakayun.cv)，直接拼接；如果包含子域名(如 www.bakayun.cv) 我们只取主域名部分？
-            // 更健壮的方法：取“注册域名” (即最后一个点之前的部分可能有二级，但简单起见：就用当前hostname，若hostname有多个点，可能包含子域)
-            // 但通常用户部署时，主域名就是访问域名，所以我们就用 window.location.hostname
-            // 但要排除端口等，已经干净。
+            // 生成链接（统一使用 HTTPS 以提高安全性）
+            const cfLink = `https://baka1.${hostname}/`;
+            const nlLink = `https://baka2.${hostname}/`;
+            const vcLink = `https://baka3.${hostname}/`;
             
-            // 特例：如果当前hostname是localhost或IP，仍按原规则拼接，比如 localhost -> baka1.localhost (访问可能无效，但技术上可行)
-            // 也可以设置fallback默认域名为 556354.xyz 但那样就违背了随主域名变化的需求，所以我们保留原始逻辑。
-            
-            const buttonsContainer = document.getElementById('dynamic-buttons');
-            if (!buttonsContainer) return;
-
-            // 清空占位，准备生成新按钮
-            buttonsContainer.innerHTML = '';
-
-            // 循环创建三个节点按钮
-            for (let i = 0; i < 3; i++) {
-                const sub = subPrefixes[i];
-                const protocol = protocols[i];
-                // 构造完整url:  protocol + sub + '.' + currentHost + '/'
-                // 注意: 如果当前主机已经是子域名，如 node.bakayun.cv，那么拼接后变成 baka1.node.bakayun.cv 可能不是预期，
-                // 但根据常见用法，用户直接在域名根上访问本页面，因此 hostname 就是根域名。更严谨可以尝试提取根域名，但存在诸多特殊情况（.com.cn等）
-                // 为了需求简洁准确，就用 hostname。同时为了确保链接正确，保留尾部斜杠。
-                let fullUrl = protocol + sub + '.' + currentHost + '/';
-                
-                // 创建<a>标签
-                const anchor = document.createElement('a');
-                anchor.href = fullUrl;
-                anchor.target = '_blank';  // 在新标签页打开
-                anchor.className = 'node-btn';
-                
-                // 添加iconify图标
-                const icon = document.createElement('iconify-icon');
-                icon.setAttribute('icon', icons[i]);
-                // 部分浏览器可能需要 iconify 手动挂载，但静态图标库已加载，可以工作
-                anchor.appendChild(icon);
-                
-                // 添加文本节点 (例如 "CF节点")
-                anchor.appendChild(document.createTextNode(labels[i]));
-                
-                // 放入容器
-                buttonsContainer.appendChild(anchor);
-            }
-
-            // 可选：在控制台输出当前生成的链接，便于调试（可删除）
-            console.log('当前主域名:', currentHost, '节点链接已更新');
-        })();
+            // 设置链接
+            document.getElementById('cf-btn').href = cfLink;
+            document.getElementById('nl-btn').href = nlLink;
+            document.getElementById('vc-btn').href = vcLink;
+        });
     </script>
-
-    <!-- 确保iconify图标即使动态插入也能渲染，iconify脚本监听了DOM变化，应该没问题 -->
 </body>
 </html>
+```
