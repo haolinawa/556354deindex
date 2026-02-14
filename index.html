@@ -53,7 +53,7 @@
             margin-bottom: 20px;
         }
 
-        .goto-title h1 {
+        。goto-title h1 {
             font-size: 64px;
             color: #c2e9fb;
             position: relative;
@@ -78,7 +78,7 @@
         }
 
         /* 按钮区域（不对称布局：按钮宽度/间距差异化） */
-        .goto-buttons {
+        。goto-buttons {
             display: flex;
             flex-direction: column;
             gap: 30px;
@@ -120,7 +120,7 @@
         }
 
         /* 按钮图标装饰 */
-        .node-btn iconify-icon {
+        。node-btn iconify-icon {
             margin-right: 15px;
             font-size: 32px;
         }
@@ -133,18 +133,18 @@
             margin-top: auto;
         }
 
-        .copyright {
+        。copyright {
             font-size: 18px;
             color: #a1c4fd;
         }
 
         /* 响应式适配 */
         @media (max-width: 768px) {
-            .goto-title h1 {
+            。goto-title h1 {
                 font-size: 48px;
             }
 
-            .node-btn {
+            。node-btn {
                 width: 100% !important;
                 font-size: 24px;
                 padding: 18px 30px;
@@ -176,15 +176,15 @@
         </div>
         <div class="goto-buttons">
             <!-- CF节点按钮 -->
-            <a href="#" target="_blank" class="node-btn" id="cf-node">
+            <a href="http://baka1.556354.xyz/" target="_blank" class="node-btn">
                 <iconify-icon icon="ph:cloud-light"></iconify-icon>CF节点
             </a>
             <!-- NL节点按钮 -->
-            <a href="#" target="_blank" class="node-btn" id="nl-node">
+            <a href="https://baka2.556354.xyz/" target="_blank" class="node-btn">
                 <iconify-icon icon="ph:map-pin-light"></iconify-icon>NL节点
             </a>
             <!-- VC节点按钮 -->
-            <a href="#" target="_blank" class="node-btn" id="vc-node">
+            <a href="https://baka3.556354.xyz/" target="_blank" class="node-btn">
                 <iconify-icon icon="ph:globe-light"></iconify-icon>VC节点
             </a>
         </div>
@@ -194,30 +194,6 @@
     <footer>
         <div class="copyright">© 2026 巴卡云 All Copyright</div>
     </footer>
-
-    <script>
-        // 等待页面加载完成
-        document.addEventListener('DOMContentLoaded', function() {
-            // 获取当前页面的主域名（比如 bakayun.cv）
-            const mainDomain = window.location.hostname;
-            
-            // 定义每个节点对应的中文前缀
-            const nodePrefixes = {
-                cf: 'baka1'，  // CF节点对应 巴卡云1.主域名
-                nl: 'baka2'，  // NL节点对应 巴卡云2.主域名
-                vc: 'baka3'   // VC节点对应 巴卡云3.主域名
-            };
-
-            // 为每个节点按钮设置动态链接
-            document.getElementById('cf-node').href = `https://${nodePrefixes.cf}.${mainDomain}`;
-            document.getElementById('nl-node').href = `https://${nodePrefixes.nl}.${mainDomain}`;
-            document.getElementById('vc-node').href = `https://${nodePrefixes.vc}.${mainDomain}`;
-            
-            // 可选：控制台打印生成的链接，方便调试
-            console.log('CF节点链接:', document.getElementById('cf-node').href);
-            console.log('NL节点链接:', document.getElementById('nl-node').href);
-            console.log('VC节点链接:', document.getElementById('vc-node').href);
-        });
-    </script>
 </body>
+
 </html>
